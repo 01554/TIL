@@ -1,0 +1,9 @@
+https://www.youtube.com/watch?v=07TuBmm67sU
+
+- XMLAgentはClaudeのために作られた
+  - bedrock はまだToolsがないので やるならXMLAgent使うほうが
+    - でもすぐ追いつくと思われる
+- AgentはAPITokenがめっちゃ消費される
+  - 自分で使うのではなく客に使わせると考えるとかなり良い商売かも？
+
+

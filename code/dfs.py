@@ -41,18 +41,20 @@ def find_path(grid):
     results = dfs(grid, start_row, start_col, set(), [])
 
     if results:
-        print(f"Found {len(results)} solutions:")
+        print(f" 答えの数 {len(results)} :")
         for result in results:
             path_str = " ".join(f"{chr(65+col)}{row}" for row, col in result)
             print(path_str)
     else:
-        print("No solution found.")
+        print("答えなし.")
 
 # グリッドの定義
+# 0=通ってよし 1=ペンギン 2=Start 3=Goal
+
 grid = [
-    [2, 0, 0, 0, 0],
+    [2, 0, 1, 0, 0],
     [0, 0, 0, 0, 0],
-    [1, 0, 0, 1, 0],
+    [0, 1, 0, 0, 0],
     [0, 0, 0, 0, 0],
     [0, 0, 0, 0, 3]
 ]

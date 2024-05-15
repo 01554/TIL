@@ -1,3 +1,6 @@
+#
+# https://openai.com/api/pricing/
+# 多分あってるはず、間違ってたら誰かPRください
 import math
 def openaiVisionPreviewTokenCalculate(width, height, detail="high"):
     newWidth = 768

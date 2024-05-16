@@ -1,8 +1,8 @@
 #
 # 帰る時に月齢絵文字をSlackに投稿して帰宅しましたのマークにしている
 # 毎回検索するの面倒になったからコード化
-# 
-import datetime
+#
+from datetime import datetime, timezone, timedelta
 
 def get_moon_emoji(moon_age:int):
     moon_emoji = ["new_moon","waxing_crescent_moon","first_quarter_moon","moon","full_moon","waning_gibbous_moon","last_quarter_moon","waning_crescent_moon"]
@@ -30,22 +30,15 @@ def get_moon_emoji(moon_age:int):
         index = 6
     elif moon_age >= 23 and moon_age <= 29:
         index = 7
-    
+
     return moon_emoji[index]
 
-def calculate_jst_moon_age(date):
+def calculate_jst_moon_age(date_jst):
     # 平均朔望月（新月から新月までの平均日数）
     synodic_month = 29.53058867
 
     # 2000年1月6日 18:14 (UTC) を基準とした新月の時刻
-    base_date = datetime.datetime(2000, 1, 6, 18, 14)
-
-    # 日本標準時とUTCの時差（秒）
-    jst_offset = 9 * 60 * 60
-
-    # 日本標準時に変換
-    date_jst = date + datetime.timedelta(seconds=jst_offset)
-
+    base_date = datetime(2000, 1, 6, 18, 14, 000000, tzinfo=timezone.utc)
     # 基準日からの経過日数を計算
     delta = date_jst - base_date
     days = delta.total_seconds() / 86400
@@ -53,5 +46,5 @@ def calculate_jst_moon_age(date):
     # 月齢を計算
     moon_age = days % synodic_month
     return moon_age
-
-f":{get_moon_emoji( round(calculate_jst_moon_age(datetime.datetime.utcnow())))}:"
+JST = timezone(timedelta(hours=+9), 'JST')
+print(f":{get_moon_emoji( round(calculate_jst_moon_age(datetime.now(JST))))}:")
